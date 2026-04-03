@@ -92,6 +92,12 @@ class PieceProposal(BaseModel):
     is_cluster: bool = False
     needs_closeup: bool = False
     descriptor: list[float] = Field(default_factory=list)
+    contour_points: list[Point] = Field(default_factory=list)
+    hu_moments: list[float] = Field(default_factory=list)
+    aspect_ratio: float = Field(gt=0.0)
+    extent: float = Field(ge=0.0, le=1.0)
+    solidity: float = Field(ge=0.0, le=1.0)
+    complexity: float = Field(ge=0.0)
 
 
 class MatchCandidate(BaseModel):
@@ -105,12 +111,25 @@ class MatchCandidate(BaseModel):
     bbox: BoundingBox | None = None
     is_cluster: bool = False
     needs_piece_scan: bool = False
+    descriptor: list[float] = Field(default_factory=list)
+    contour_points: list[Point] = Field(default_factory=list)
+    hu_moments: list[float] = Field(default_factory=list)
+    aspect_ratio: float | None = None
+    extent: float | None = None
+    solidity: float | None = None
+    complexity: float | None = None
 
 
 class QueryTarget(BaseModel):
     source_artifact_id: str | None = None
     bbox: BoundingBox
     descriptor: list[float] = Field(default_factory=list)
+    contour_points: list[Point] = Field(default_factory=list)
+    hu_moments: list[float] = Field(default_factory=list)
+    aspect_ratio: float = Field(gt=0.0)
+    extent: float = Field(ge=0.0, le=1.0)
+    solidity: float = Field(ge=0.0, le=1.0)
+    complexity: float = Field(ge=0.0)
     extraction_confidence: float = Field(ge=0.0, le=1.0)
     used_manual_correction: bool = False
 

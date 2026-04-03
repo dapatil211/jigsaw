@@ -23,8 +23,8 @@ The system is tuned for top-5 usefulness, not top-1 certainty.
 
 ## Initial Thresholds
 
-- `high_confidence`: top score >= 0.86 and the best candidate is not a cluster
-- `medium_confidence`: top score >= 0.72 and the leading candidates are not cluster-heavy
+- `high_confidence`: top score >= 0.82 and the best candidate is not a cluster
+- `medium_confidence`: top score >= 0.55 and the leading candidates are not cluster-heavy
 - Low extraction confidence: `failed_extraction`
 - Otherwise: `needs_piece_scan`
 

@@ -213,6 +213,11 @@ function App() {
       setError("Choose a board photo for the gap and tap exactly one target gap.");
       return;
     }
+    const selectedCaptureIds = [...selectedCandidateCaptureIds];
+    if (selectedCaptureIds.length === 0) {
+      setError("Select at least one capture to search for candidate pieces.");
+      return;
+    }
     setBusy(true);
     setError("");
 
@@ -226,7 +231,7 @@ function App() {
 
     const request: GapQueryRequest = {
       boardCaptureId: selectedGapBoardCapture.boardCaptureId,
-      candidateCaptureIds: selectedCandidateCaptureIds,
+      candidateCaptureIds: selectedCaptureIds,
       gapTap: gapTap[0],
       gapImage: gapFile ?? undefined,
       gapCloseupUrl: gapPreview || undefined,
@@ -234,7 +239,20 @@ function App() {
     };
 
     try {
-      const result = await apiClient.submitGapQuery(session.id, request);
+      const rawResult = await apiClient.submitGapQuery(session.id, request);
+      const filteredCandidates = rawResult.candidates.filter(
+        (candidate) =>
+          !candidate.sourceBoardCaptureId ||
+          selectedCaptureIds.includes(candidate.sourceBoardCaptureId)
+      );
+      const filteredPrompts = rawResult.pieceScanPrompts.filter((prompt) =>
+        filteredCandidates.some((candidate) => candidate.id === prompt.candidateId)
+      );
+      const result: QueryResult = {
+        ...rawResult,
+        candidates: filteredCandidates,
+        pieceScanPrompts: filteredPrompts,
+      };
       setSession((current) =>
         current
           ? {
@@ -245,7 +263,9 @@ function App() {
           : current
       );
       setSelectedCandidateId(result.candidates[0]?.id ?? "");
-      setStatusMessage(result.summary);
+      setStatusMessage(
+        `${result.summary} Searched ${selectedCaptureIds.length} capture${selectedCaptureIds.length === 1 ? "" : "s"}.`
+      );
       await syncSession(session.id);
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : "Failed to submit gap query.");

@@ -63,7 +63,13 @@ def evaluate_manifest(path: Path) -> dict[str, float | int]:
         gap_path = None
         if query.get("gap_image"):
             gap_path = (path.parent / query["gap_image"]).resolve()
-        analysis = analyze_gap_query(board_image_path, gap_path, _BoardCaptureShim, gap_payload)
+        analysis = analyze_gap_query(
+            board_image_path,
+            gap_path,
+            _BoardCaptureShim,
+            [_BoardCaptureShim],
+            gap_payload,
+        )
         if not analysis.candidates:
             failed += 1
             continue
