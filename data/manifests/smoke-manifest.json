@@ -1,0 +1,60 @@
+{
+  "session_id": "session-smoke",
+  "board_image": "../raw/smoke/board.jpg",
+  "board_corners": [
+    {
+      "x": 0.1,
+      "y": 0.1
+    },
+    {
+      "x": 0.9,
+      "y": 0.1
+    },
+    {
+      "x": 0.9,
+      "y": 0.9
+    },
+    {
+      "x": 0.1,
+      "y": 0.9
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "query-smoke-001",
+      "gap_tap": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "manual_correction": {
+        "rough_polygon": [
+          {
+            "x": 0.45,
+            "y": 0.45
+          },
+          {
+            "x": 0.55,
+            "y": 0.45
+          },
+          {
+            "x": 0.55,
+            "y": 0.55
+          },
+          {
+            "x": 0.45,
+            "y": 0.55
+          }
+        ]
+      },
+      "truth_candidate_id": "proposal-006",
+      "candidate_scans": [
+        {
+          "candidate_id": "proposal-006",
+          "image": "../raw/smoke/piece.jpg"
+        }
+      ],
+      "gap_image": "../raw/smoke/gap.jpg",
+      "notes": "Synthetic smoke fixture for local validation and evaluation."
+    }
+  ]
+}

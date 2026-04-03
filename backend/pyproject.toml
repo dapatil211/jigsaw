@@ -1,0 +1,22 @@
+[project]
+name = "jigsaw-assistant-backend"
+version = "0.1.0"
+description = "FastAPI backend for the jigsaw assistant."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "eval-type-backport>=0.2.0",
+  "fastapi>=0.115.0",
+  "httpx>=0.28.0",
+  "numpy>=1.26.0",
+  "opencv-python>=4.10.0",
+  "pydantic>=2.9.0",
+  "python-multipart>=0.0.9",
+  "scikit-image>=0.24.0",
+  "scipy>=1.13.0",
+  "uvicorn>=0.30.0"
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

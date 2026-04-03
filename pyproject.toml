@@ -1,0 +1,7 @@
+[project]
+name = "puzzles"
+version = "0.1.0"
+description = "Planning workspace for a mobile-first jigsaw assistant."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
